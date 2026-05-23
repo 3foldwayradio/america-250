@@ -219,7 +219,7 @@ async function analyze() {
     let final = null;
 
     for (let i = 0; i < 9; i++) {
-      const body = { model: 'claude-sonnet-4-6', max_tokens: 1000, system: SYS, messages };
+      const body = { model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYS, messages };
       if (tools.length) body.tools = tools;
 
       const r = await fetch('/api/analyze', {
@@ -241,10 +241,26 @@ async function analyze() {
 
     if (!final) throw new Error('No response from archive.');
 
+    // Collect all text blocks (web search responses may have multiple)
     const txt = (final.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
-    const s = txt.indexOf('{'), e = txt.lastIndexOf('}');
-    if (s === -1) throw new Error('No match found in response.');
-    const result = JSON.parse(txt.slice(s, e + 1));
+
+    if (!txt) {
+      const blockTypes = (final.content || []).map(b => b.type).join(', ');
+      throw new Error(`No text in response. Block types: ${blockTypes}. stop_reason: ${final.stop_reason}`);
+    }
+
+    // Strip markdown code fences if present (```json ... ``` or ``` ... ```)
+    const stripped = txt.replace(/```(?:json)?\s*/gi, '').replace(/```/g, '').trim();
+
+    const s = stripped.indexOf('{'), e = stripped.lastIndexOf('}');
+    if (s === -1) throw new Error(`No JSON found. Raw response (first 400 chars): ${txt.slice(0, 400)}`);
+
+    let result;
+    try {
+      result = JSON.parse(stripped.slice(s, e + 1));
+    } catch (parseErr) {
+      throw new Error(`JSON parse failed: ${parseErr.message}. Raw (first 400): ${stripped.slice(s, Math.min(s + 400, e + 1))}`);
+    }
 
     const pp = `18th century oil painting portrait, ${result.figureName}${result.figureAlias ? ' also known as ' + result.figureAlias : ''}, ${result.portraitPrompt || result.figureTitle + ', American Revolutionary era'}, dramatic candlelight, aged canvas texture, masterwork historical portrait`;
     const portrait = `https://image.pollinations.ai/prompt/${encodeURIComponent(pp)}?width=640&height=440&seed=250&nologo=true`;
@@ -253,7 +269,7 @@ async function analyze() {
     set({ result, portrait, pLoaded: false, step: 'result', err: null });
   } catch (err) {
     clearInterval(msgTimer);
-    set({ err: 'The historical archive returned no clear match. Please try again.', step: 'input' });
+    set({ err: err.message, step: 'input' });
   }
 }
 
