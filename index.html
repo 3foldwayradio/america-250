@@ -219,7 +219,7 @@ async function analyze() {
     let final = null;
 
     for (let i = 0; i < 9; i++) {
-      const body = { model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYS, messages };
+      const body = { model: 'claude-sonnet-4-6', max_tokens: 1000, system: SYS, messages };
       if (tools.length) body.tools = tools;
 
       const r = await fetch('/api/analyze', {
