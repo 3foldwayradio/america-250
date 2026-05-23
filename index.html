@@ -275,7 +275,7 @@ async function analyze() {
 function copyShare() {
   if (!S.result) return;
   const r = S.result;
-  const t = `🦅 AMERICA 250: WHO WOULD YOU HAVE BEEN?\n\nMy Revolutionary Era match: ${r.figureName}${r.figureAlias ? ' ("' + r.figureAlias + '")' : ''}\n${r.figureTitle} · ${r.figureSide} · ${r.matchPercentage}% Match\n\n"${r.shareQuote}"\n\nDiscover yours → america250.app\n#America250 #WhoWouldYouHaveBeen #1776`;
+  const t = `🦅 AMERICA 250: WHO WOULD YOU HAVE BEEN?\n\nMy Revolutionary Era match: ${r.figureName}${r.figureAlias ? ' ("' + r.figureAlias + '")' : ''}\n${r.figureTitle} · ${r.figureSide} · ${r.matchPercentage}% Match\n\n"${r.shareQuote}"\n\nDiscover yours → america250match.com\n#America250 #WhoWouldYouHaveBeen #1776`;
   navigator.clipboard.writeText(t).then(() => {
     set({ copied: true });
     setTimeout(() => set({ copied: false }), 2800);
