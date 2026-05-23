@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>America 250: Who Would You Have Been?</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦅</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lora',Georgia,serif;background:#0c0803;color:#f0e4c8;min-height:100vh}
+#app{min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#241408 0%,#0c0803 65%);padding:20px}
+.content{max-width:740px;margin:0 auto}
+
+/* LANDING */
+.landing{text-align:center;padding:56px 16px 36px}
+.eagle{font-size:56px;display:block;margin-bottom:18px}
+.eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.28em;color:#b8860b;text-transform:uppercase;margin-bottom:16px}
+.series-title{font-family:'Cinzel',serif;font-size:clamp(12px,2vw,16px);font-weight:700;color:#b8860b;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px}
+.main-h{font-family:'Cinzel',serif;font-size:clamp(26px,5.5vw,50px);font-weight:700;color:#f0e4c8;line-height:1.15;margin-bottom:22px}
+.ornament{color:rgba(184,134,11,0.35);letter-spacing:0.55em;font-size:14px;margin:14px 0}
+.landing-p{font-size:15px;color:#9a7848;line-height:1.85;max-width:490px;margin:0 auto 38px;font-style:italic}
+.cta{background:none;border:1.5px solid #b8860b;color:#f0e4c8;font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:0.2em;padding:16px 46px;cursor:pointer;text-transform:uppercase;transition:all 0.3s;border-radius:1px}
+.cta:hover{background:rgba(184,134,11,0.14);box-shadow:0 0 32px rgba(184,134,11,0.22);transform:translateY(-1px)}
+.roster{margin-top:30px;font-size:11px;color:#4a3018;font-family:'Cinzel',serif;letter-spacing:0.1em;line-height:2.2}
+
+/* INPUT */
+.step-wrap{padding:36px 16px 24px}
+.step-ey{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.22em;color:#b8860b;text-transform:uppercase;text-align:center;margin-bottom:10px}
+.step-h{font-family:'Cinzel',serif;font-size:clamp(20px,3.5vw,30px);color:#f0e4c8;text-align:center;margin-bottom:6px}
+.step-hint{font-size:13px;color:#7a5832;font-style:italic;text-align:center;margin-bottom:28px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.panel{background:rgba(18,10,3,0.78);border:1px solid rgba(184,134,11,0.18);padding:22px 24px;border-radius:1px;margin-bottom:16px}
+.plbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.18em;color:#b8860b;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(184,134,11,0.12)}
+.req{color:#8b1a1a}
+.drop-zone{border:1.5px dashed rgba(184,134,11,0.3);padding:30px 16px;text-align:center;cursor:pointer;transition:all 0.25s;border-radius:1px}
+.drop-zone:hover,.drop-zone.over{border-color:rgba(184,134,11,0.65);background:rgba(184,134,11,0.05)}
+.drop-ic{font-size:30px;color:#b8860b;opacity:0.55;margin-bottom:10px}
+.drop-t{font-family:'Cinzel',serif;font-size:12px;color:#c8a050;letter-spacing:0.05em;margin-bottom:4px}
+.drop-h{font-size:11px;color:#4a3015}
+.prev-img{width:100%;height:190px;object-fit:cover;display:block;border-radius:1px}
+.prev-name{font-size:11px;color:#b8860b;font-style:italic;margin:6px 0}
+.chg-btn{background:none;border:1px solid rgba(184,134,11,0.25);color:#b8860b;font-size:10px;font-family:'Cinzel',serif;padding:5px 12px;cursor:pointer;border-radius:1px;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s}
+.chg-btn:hover{background:rgba(184,134,11,0.1)}
+.flbl{display:block;font-size:10px;letter-spacing:0.14em;color:#7a5832;font-family:'Cinzel',serif;text-transform:uppercase;margin-bottom:6px}
+.url-in{width:100%;background:rgba(8,5,1,0.7);border:1px solid rgba(184,134,11,0.15);padding:10px 13px;color:#d4a840;font-size:13px;font-family:'Lora',serif;outline:none;border-radius:1px;margin-bottom:10px;transition:border-color 0.2s}
+.url-in::placeholder{color:#3a2510}
+.url-in:focus{border-color:rgba(184,134,11,0.42)}
+.url-cap{font-size:11px;color:#4a3015;font-style:italic;margin-bottom:14px;line-height:1.6}
+.go-btn{width:100%;background:linear-gradient(135deg,#8b6300,#5a3f00);border:1px solid rgba(184,134,11,0.4);color:#f0e4c8;font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:0.2em;padding:17px;cursor:pointer;text-transform:uppercase;border-radius:1px;transition:all 0.3s;margin-top:8px}
+.go-btn:disabled{opacity:0.35;cursor:not-allowed}
+.go-btn:not(:disabled):hover{box-shadow:0 6px 26px rgba(184,134,11,0.28);transform:translateY(-1px)}
+.err{background:rgba(139,26,26,0.14);border:1px solid rgba(139,26,26,0.28);padding:12px 16px;color:#c06060;font-size:13px;font-style:italic;border-radius:1px;margin-bottom:14px}
+
+/* ANALYZING */
+.analyzing{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:480px;text-align:center;padding:40px 20px}
+.quill{font-size:46px;animation:qw 1.9s ease-in-out infinite;display:block;margin-bottom:26px}
+@keyframes qw{0%,100%{transform:rotate(-12deg) translateY(0)}50%{transform:rotate(8deg) translateY(-10px)}}
+.an-h{font-family:'Cinzel',serif;font-size:22px;color:#f0e4c8;margin-bottom:10px}
+.an-s{font-size:14px;color:#9a7848;font-style:italic;min-height:22px;transition:opacity 0.4s}
+.pbar{width:270px;height:1.5px;background:rgba(184,134,11,0.12);margin-top:30px;border-radius:1px;overflow:hidden}
+.pfill{height:100%;background:#b8860b;animation:pw 3.5s ease-in-out infinite}
+@keyframes pw{0%{width:10%}40%{width:68%}75%{width:86%}100%{width:91%}}
+
+/* RESULT — TRADING CARD */
+.result-wrap{padding:24px 16px 20px}
+.back-btn{background:none;border:none;color:#4a3015;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.12em;cursor:pointer;text-transform:uppercase;padding:0 0 22px;display:flex;align-items:center;gap:6px;transition:color 0.2s}
+.back-btn:hover{color:#b8860b}
+.card-outer{max-width:500px;margin:0 auto;border-radius:4px;overflow:hidden;box-shadow:0 0 0 3px #8b6300,0 0 0 8px #0c0803,0 0 0 11px #5a3f00,0 28px 80px rgba(0,0,0,0.88)}
+.card-hdr{background:#1a2a4a;padding:14px 18px 12px;text-align:center;border-bottom:2px solid #8b6300}
+.card-series{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.3em;color:#c8a030;text-transform:uppercase;margin-bottom:6px}
+.card-name{font-family:'Cinzel',serif;font-size:clamp(18px,4vw,28px);font-weight:700;color:#f0e4c8;line-height:1.1}
+.card-alias{font-family:'Lora',serif;font-size:13px;color:#9898c0;font-style:italic;margin-top:4px}
+.card-img-wrap{background:#050302;width:100%;aspect-ratio:16/11;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.port-ph{color:#3a2510;font-style:italic;font-size:13px;padding:20px}
+.card-stats{background:#f0e4c8;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:2px solid #8b6300}
+.stat{padding:9px 7px;text-align:center;border-right:1px solid rgba(139,99,0,0.2)}
+.stat:last-child{border-right:none}
+.stat-l{font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.16em;color:#7a5025;text-transform:uppercase;display:block;margin-bottom:4px}
+.stat-v{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#1a0e05;display:block}
+.stat-v.sm{font-size:10px}
+.mbar{height:3px;background:#d4c49a;margin-top:4px;border-radius:1px;overflow:hidden}
+.mfill{height:100%;background:#8b1a1a;border-radius:1px}
+.sc-patriot{color:#1a3a1a!important}
+.sc-loyalist{color:#7a5000!important}
+.sc-british{color:#1a1a4a!important}
+.sc-haudenosaunee,.sc-nations{color:#5a2a0a!important}
+.sc-hero{color:#1a2a4a!important}
+.sc-ally{color:#1a3a2a!important}
+.card-body{background:#f0e4c8;padding:16px 18px;color:#1a0e05}
+.card-role{font-family:'Cinzel',serif;font-size:10px;font-weight:600;letter-spacing:0.1em;color:#5a3510;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(139,99,0,0.18)}
+.sec{margin-bottom:13px}
+.sec-l{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:#8b6300;text-transform:uppercase;margin-bottom:5px}
+.sec-t{font-size:13px;color:#2a1a08;line-height:1.72}
+.card-hist{background:#ebe0c4;padding:15px 18px;border-top:1px solid rgba(139,99,0,0.18);border-bottom:1px solid rgba(139,99,0,0.18)}
+.card-quote{background:#1a2a4a;padding:15px 18px;text-align:center}
+.q-text{font-family:'Lora',serif;font-size:14px;font-style:italic;color:#c8d4e8;line-height:1.72}
+.q-attr{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.14em;color:#7080a0;text-transform:uppercase;margin-top:6px}
+.card-foot{background:#f0e4c8;padding:8px 18px;border-top:1px solid rgba(139,99,0,0.15);display:flex;justify-content:space-between;align-items:center}
+.foot-t{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.12em;color:#8a6030;text-transform:uppercase}
+.surprise{background:rgba(139,26,26,0.08);border:1px solid rgba(139,26,26,0.2);padding:13px 16px;margin:16px auto 0;border-radius:1px;max-width:500px}
+.surp-l{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.2em;color:#8b1a1a;text-transform:uppercase;margin-bottom:5px}
+.surp-t{font-size:13px;color:#c4a870;font-style:italic;line-height:1.68}
+.actions{display:flex;gap:12px;max-width:500px;margin:18px auto 0;flex-wrap:wrap}
+.act{flex:1;min-width:130px;padding:13px;border-radius:1px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:all 0.25s}
+.act-p{background:linear-gradient(135deg,#8b6300,#5a3f00);border:1px solid rgba(184,134,11,0.35);color:#f0e4c8}
+.act-p:hover{box-shadow:0 4px 18px rgba(184,134,11,0.25)}
+.act-s{background:transparent;border:1px solid rgba(184,134,11,0.22);color:#9a7848}
+.act-s:hover{background:rgba(184,134,11,0.07)}
+.copy-ok{font-size:11px;color:#60b870;font-family:'Cinzel',serif;text-align:center;margin-top:8px;max-width:500px;margin-left:auto;margin-right:auto;height:18px;transition:opacity 0.4s;opacity:0}
+.copy-ok.show{opacity:1}
+</style>
+</head>
+<body>
+<div id="app"><div class="content" id="root"></div></div>
+
+<script>
+const SYS = `You are the historical matching engine for AMERICA 250: WHO WOULD YOU HAVE BEEN? — a 250th anniversary experience. Analyze the person's photo and any online presence to match them to a historical figure from the American Revolutionary era (1760s–1800s).
+
+CRITICAL: Resist defaulting to Washington, Jefferson, or Hamilton. The full figure pool includes:
+
+PATRIOTS: George Washington, Thomas Jefferson, Alexander Hamilton, James Madison, Benjamin Franklin, John Adams, Patrick Henry, Paul Revere, Thomas Paine, Nathanael Greene, Francis Marion (Swamp Fox)
+PATRIOT WOMEN: Abigail Adams, Mercy Otis Warren, Deborah Sampson (fought disguised as a man), Molly Pitcher, Betsy Ross, Phillis Wheatley (poet and intellectual)
+OVERLOOKED HEROES: Crispus Attucks (first martyr, of African and Wampanoag descent), James Armistead Lafayette (enslaved man who became a double agent for Washington), Haym Salomon (Jewish financier who personally funded the Revolution), Peter Salem (Black soldier at Bunker Hill)
+HAUDENOSAUNEE / IROQUOIS CONFEDERACY: Canassatego (Onondaga chief — his 1744 Treaty of Lancaster speech urging colonial union was printed by Benjamin Franklin and directly inspired the Albany Plan of 1754, a forerunner of the Constitution; he is the most important non-European influence on American democracy), Hendrick Theyanoguin / King Hendrick (Mohawk sachem present at the 1754 Albany Congress where Franklin proposed colonial union modeled on the Haudenosaunee Confederacy), Red Jacket / Sagoyewatha (Seneca orator), Cornplanter (Seneca diplomat), Joseph Brant / Thayendanegea (Mohawk war chief and British ally), Dragging Canoe (Cherokee warrior who refused to cede land)
+LOYALISTS / TORIES: William Franklin (royal governor of New Jersey and Benjamin Franklin's estranged son — the most poignant Loyalist story of the era), Jonathan Sewall (lawyer who chose exile over revolution), Joseph Galloway (Continental Congress delegate who became a Loyalist)
+BRITISH: Lord Cornwallis, General John Burgoyne ("Gentleman Johnny"), Banastre Tarleton ("Bloody Ban"), Major John André (executed spy)
+ALLIES: Marquis de Lafayette, Tadeusz Kościuszko, Baron von Steuben
+
+Match based on: facial features and expression energy from the photo; writing style, stated values, and expressed beliefs from any online presence. The soul match matters most. Anti-establishment fire → Thomas Paine. Quiet craft and symbol-making → Betsy Ross. Navigating two cultures with fierce loyalty to kin → Canassatego or Joseph Brant. Someone who funded others but took no glory → Haym Salomon.
+
+Return ONLY valid compact JSON with no markdown, no preamble, no explanation:
+{"figureName":"Full name","figureAlias":"Alias or null","figureTitle":"Role e.g. Onondaga Chief and Constitutional Influence","figureSide":"Patriot|Loyalist|British|Haudenosaunee|French Ally|Overlooked Hero","figureYears":"e.g. 1700–1750","matchPercentage":87,"physicalMatch":"2 sentences about facial and physical resonance","soulMatch":"2 sentences about personality and values alignment","historyLesson":"3 sentences including at least one thing most people do not know","surpriseFactor":"One memorable sentence about why this match may surprise the person","portraitPrompt":"Detailed visual description for portrait generation including clothing setting lighting and expression","shareQuote":"Authentic or highly plausible quote from this figure max 18 words"}`;
+
+let S = {
+  step: 'landing',
+  photo: null,
+  urls: ['', '', ''],
+  result: null,
+  portrait: null,
+  pLoaded: false,
+  msg: 'Consulting the historical record…',
+  err: null,
+  copied: false
+};
+
+const MSGS = [
+  'Consulting the historical record…',
+  'Reading your countenance by candlelight…',
+  'Weighing your values against the era…',
+  'Searching pamphlets and broadsides…',
+  'The quill moves across parchment…',
+  'Summoning spirits of 1776…',
+  'Cross-referencing the Haudenosaunee Confederacy…',
+  'Consulting the Albany Congress of 1754…'
+];
+
+let msgTimer = null;
+
+function set(u) { S = { ...S, ...u }; draw(); }
+
+function sideClass(s) {
+  if (!s) return '';
+  const l = s.toLowerCase();
+  if (l.includes('loyalist') || l.includes('tory')) return 'sc-loyalist';
+  if (l.includes('british')) return 'sc-british';
+  if (l.includes('haudenosaunee') || l.includes('iroquois') || l.includes('nation')) return 'sc-haudenosaunee';
+  if (l.includes('ally')) return 'sc-ally';
+  if (l.includes('overlooked') || l.includes('hero')) return 'sc-hero';
+  return 'sc-patriot';
+}
+
+async function resizePhoto(file) {
+  return new Promise(res => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      let { width: w, height: h } = img;
+      const max = 900;
+      if (w > max || h > max) {
+        if (w > h) { h = Math.round(h / w * max); w = max; }
+        else { w = Math.round(w / h * max); h = max; }
+      }
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      const d = c.toDataURL('image/jpeg', 0.82);
+      res({ data: d.split(',')[1], type: 'image/jpeg', preview: d, name: file.name });
+    };
+    img.src = url;
+  });
+}
+
+async function analyze() {
+  set({ step: 'analyzing', err: null });
+  msgTimer = setInterval(() => set({ msg: MSGS[Math.floor(Math.random() * MSGS.length)] }), 2600);
+
+  try {
+    const hasUrls = S.urls.some(u => u.trim());
+    const uc = [];
+
+    if (S.photo) {
+      uc.push({ type: 'image', source: { type: 'base64', media_type: S.photo.type, data: S.photo.data } });
+    }
+
+    let p = 'Analyze this person and identify their Revolutionary Era historical counterpart.';
+    if (hasUrls) {
+      p += '\n\nSearch and read their online presence for deeper soul analysis:\n'
+        + S.urls.filter(u => u.trim()).map((u, i) => `${i + 1}. ${u}`).join('\n')
+        + '\n\nTheir expressed values, writing style, and stated beliefs should heavily influence the match.';
+    }
+    p += '\n\nReturn only the JSON object.';
+    uc.push({ type: 'text', text: p });
+
+    const tools = hasUrls ? [{ type: 'web_search_20250305', name: 'web_search' }] : [];
+    let messages = [{ role: 'user', content: uc }];
+    let final = null;
+
+    for (let i = 0; i < 9; i++) {
+      const body = { model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYS, messages };
+      if (tools.length) body.tools = tools;
+
+      const r = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const d = await r.json();
+
+      if (d.stop_reason === 'end_turn' || !d.stop_reason) { final = d; break; }
+      if (d.stop_reason === 'tool_use') {
+        messages.push({ role: 'assistant', content: d.content });
+        const tr = d.content.filter(b => b.type === 'tool_use')
+          .map(b => ({ type: 'tool_result', tool_use_id: b.id, content: '' }));
+        if (tr.length) messages.push({ role: 'user', content: tr });
+        else { final = d; break; }
+      } else { final = d; break; }
+    }
+
+    if (!final) throw new Error('No response from archive.');
+
+    const txt = (final.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+    const s = txt.indexOf('{'), e = txt.lastIndexOf('}');
+    if (s === -1) throw new Error('No match found in response.');
+    const result = JSON.parse(txt.slice(s, e + 1));
+
+    const pp = `18th century oil painting portrait, ${result.figureName}${result.figureAlias ? ' also known as ' + result.figureAlias : ''}, ${result.portraitPrompt || result.figureTitle + ', American Revolutionary era'}, dramatic candlelight, aged canvas texture, masterwork historical portrait`;
+    const portrait = `https://image.pollinations.ai/prompt/${encodeURIComponent(pp)}?width=640&height=440&seed=250&nologo=true`;
+
+    clearInterval(msgTimer);
+    set({ result, portrait, pLoaded: false, step: 'result', err: null });
+  } catch (err) {
+    clearInterval(msgTimer);
+    set({ err: 'The historical archive returned no clear match. Please try again.', step: 'input' });
+  }
+}
+
+function copyShare() {
+  if (!S.result) return;
+  const r = S.result;
+  const t = `🦅 AMERICA 250: WHO WOULD YOU HAVE BEEN?\n\nMy Revolutionary Era match: ${r.figureName}${r.figureAlias ? ' ("' + r.figureAlias + '")' : ''}\n${r.figureTitle} · ${r.figureSide} · ${r.matchPercentage}% Match\n\n"${r.shareQuote}"\n\nDiscover yours → america250.app\n#America250 #WhoWouldYouHaveBeen #1776`;
+  navigator.clipboard.writeText(t).then(() => {
+    set({ copied: true });
+    setTimeout(() => set({ copied: false }), 2800);
+  });
+}
+
+function updateUrl(i, v) { const u = [...S.urls]; u[i] = v; S.urls = u; }
+
+function draw() {
+  const el = document.getElementById('root');
+  if (!el) return;
+
+  if (S.step === 'landing') {
+    el.innerHTML = `<div class="landing">
+<span class="eagle">🦅</span>
+<div class="eyebrow">1776 · America's 250th Anniversary · 2026</div>
+<div class="series-title">America 250</div>
+<h1 class="main-h">Who Would You<br>Have Been?</h1>
+<div class="ornament">⁂ · ⁂ · ⁂</div>
+<p class="landing-p">Your face carries the echo of a forgotten soul. Upload your portrait — and optionally share your online voice — to discover which figure of the Revolutionary era you truly are. It may not be who you expect.</p>
+<button class="cta" onclick="set({step:'input'})">Begin Your Discovery</button>
+<p class="roster">Patriots · Loyalists & Tories · Haudenosaunee Confederacy<br>British Officers · Poets · Spies · Overlooked Heroes</p>
+</div>`;
+
+  } else if (S.step === 'input') {
+    const ph = S.photo;
+    el.innerHTML = `<div class="step-wrap">
+<div class="step-ey">America 250 · Historical Profile</div>
+<h2 class="step-h">Present Your Countenance</h2>
+<p class="step-hint">Your portrait is required. Online links deepen the soul match.</p>
+${S.err ? `<div class="err">${S.err}</div>` : ''}
+<div class="grid2">
+  <div>
+    <div class="panel">
+      <div class="plbl">Your Portrait <span class="req">✦</span></div>
+      ${ph
+        ? `<img src="${ph.preview}" alt="your photo" class="prev-img"><p class="prev-name">${ph.name}</p><button class="chg-btn" onclick="document.getElementById('pIn').click()">Change Photo</button>`
+        : `<div class="drop-zone" id="dz"><div class="drop-ic">◈</div><div class="drop-t">Upload Your Portrait</div><div class="drop-h">Click or drag your photo here</div></div>`
+      }
+      <input type="file" id="pIn" accept="image/*" style="display:none">
+    </div>
+  </div>
+  <div>
+    <div class="panel">
+      <div class="plbl">Your Online Voice <span style="color:#4a3015;font-weight:400;font-size:9px">(Optional)</span></div>
+      <p class="url-cap">Share up to 3 public URLs — Facebook, blog, personal website. The AI reads your actual words to find your era's counterpart.</p>
+      ${[0, 1, 2].map(i => `
+        <label class="flbl">Link ${i + 1}</label>
+        <input class="url-in" type="url" placeholder="${['https://facebook.com/yourprofile', 'https://yourblog.com', 'https://yourwebsite.com'][i]}" value="${S.urls[i]}" onchange="updateUrl(${i}, this.value)">`).join('')}
+    </div>
+  </div>
+</div>
+<button class="go-btn" ${!ph ? 'disabled' : ''} onclick="analyze()">✦ &nbsp; Consult the Historical Archive &nbsp; ✦</button>
+</div>`;
+
+    const pi = document.getElementById('pIn');
+    if (pi) pi.onchange = async e => { if (e.target.files[0]) { const p = await resizePhoto(e.target.files[0]); set({ photo: p }); } };
+    const dz = document.getElementById('dz');
+    if (dz) {
+      dz.onclick = () => document.getElementById('pIn').click();
+      dz.ondragover = e => { e.preventDefault(); dz.classList.add('over'); };
+      dz.ondragleave = () => dz.classList.remove('over');
+      dz.ondrop = async e => { e.preventDefault(); dz.classList.remove('over'); if (e.dataTransfer.files[0]) { const p = await resizePhoto(e.dataTransfer.files[0]); set({ photo: p }); } };
+    }
+
+  } else if (S.step === 'analyzing') {
+    el.innerHTML = `<div class="analyzing">
+<span class="quill">🪶</span>
+<h2 class="an-h">Consulting the Archive</h2>
+<p class="an-s">${S.msg}</p>
+<div class="pbar"><div class="pfill"></div></div>
+</div>`;
+
+  } else if (S.step === 'result' && S.result) {
+    const r = S.result;
+    const sc = sideClass(r.figureSide);
+    el.innerHTML = `<div class="result-wrap">
+<button class="back-btn" onclick="set({step:'input',result:null,portrait:null})">← Begin Again</button>
+<div class="card-outer">
+  <div class="card-hdr">
+    <div class="card-series">America 250 · Revolutionary Era · Historical Match</div>
+    <div class="card-name">${r.figureName}</div>
+    ${r.figureAlias ? `<div class="card-alias">"${r.figureAlias}"</div>` : ''}
+  </div>
+  <div class="card-img-wrap" id="imgWrap">
+    ${S.portrait
+      ? `<img src="${S.portrait}" alt="${r.figureName}" id="portImg" ${S.pLoaded ? '' : 'style="display:none"'}><span class="port-ph" ${S.pLoaded ? 'style="display:none"' : ''}>Rendering period portrait…</span>`
+      : '<span class="port-ph">Generating portrait…</span>'}
+  </div>
+  <div class="card-stats">
+    <div class="stat">
+      <span class="stat-l">Side</span>
+      <span class="stat-v ${sc}">${(r.figureSide || 'Patriot').split(' ')[0]}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-l">Years</span>
+      <span class="stat-v sm">${r.figureYears || 'c. 1700s'}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-l">Match</span>
+      <span class="stat-v">${r.matchPercentage}%</span>
+      <div class="mbar"><div class="mfill" style="width:${r.matchPercentage}%"></div></div>
+    </div>
+    <div class="stat">
+      <span class="stat-l">Era</span>
+      <span class="stat-v sm">Rev. War</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="card-role">${r.figureTitle}</div>
+    <div class="sec"><div class="sec-l">Physical Echo</div><p class="sec-t">${r.physicalMatch}</p></div>
+    <div class="sec"><div class="sec-l">Soul Match</div><p class="sec-t">${r.soulMatch}</p></div>
+  </div>
+  <div class="card-hist">
+    <div class="sec-l" style="margin-bottom:8px">The History Lesson</div>
+    <p class="sec-t">${r.historyLesson}</p>
+  </div>
+  ${r.shareQuote ? `<div class="card-quote"><p class="q-text">"${r.shareQuote}"</p><p class="q-attr">— ${r.figureName}</p></div>` : ''}
+  <div class="card-foot">
+    <span class="foot-t">America 250 · 1776–2026</span>
+    <span class="foot-t">#WhoWouldYouHaveBeen</span>
+  </div>
+</div>
+${r.surpriseFactor ? `<div class="surprise"><div class="surp-l">⚡ Why This May Surprise You</div><p class="surp-t">${r.surpriseFactor}</p></div>` : ''}
+<div class="actions">
+  <button class="act act-p" onclick="copyShare()">Copy &amp; Share Result</button>
+  <button class="act act-s" onclick="set({step:'input',result:null,portrait:null,photo:null,urls:['','','']})">Try Again</button>
+</div>
+<div class="copy-ok ${S.copied ? 'show' : ''}">✦ Copied to clipboard — ready to share!</div>
+</div>`;
+
+    const pi = document.getElementById('portImg');
+    if (pi && !S.pLoaded) {
+      pi.onload = () => { S.pLoaded = true; draw(); };
+      pi.onerror = () => { pi.remove(); };
+    }
+  }
+}
+
+draw();
+</script>
+</body>
+</html>
