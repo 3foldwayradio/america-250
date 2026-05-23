@@ -111,6 +111,12 @@ body{font-family:'Lora',Georgia,serif;background:#0c0803;color:#f0e4c8;min-heigh
 .act-s:hover{background:rgba(184,134,11,0.07)}
 .copy-ok{font-size:11px;color:#60b870;font-family:'Cinzel',serif;text-align:center;margin-top:8px;max-width:500px;margin-left:auto;margin-right:auto;height:18px;transition:opacity 0.4s;opacity:0}
 .copy-ok.show{opacity:1}
+.renovation{background:rgba(18,10,3,0.82);border:1px solid rgba(184,134,11,0.22);border-top:2px solid rgba(184,134,11,0.35);padding:20px 22px;margin:16px auto 0;border-radius:1px;max-width:500px;text-align:center}
+.ren-eyebrow{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.25em;color:#b8860b;text-transform:uppercase;margin-bottom:10px}
+.ren-body{font-size:14px;color:#c4a870;line-height:1.8;font-style:italic;margin-bottom:14px}
+.ren-body strong{color:#f0e4c8;font-style:normal;font-weight:500}
+.ren-link{display:inline-block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.14em;color:#b8860b;text-transform:uppercase;border-bottom:1px solid rgba(184,134,11,0.4);padding-bottom:2px;text-decoration:none;transition:all 0.2s}
+.ren-link:hover{color:#f0e4c8;border-bottom-color:rgba(240,228,200,0.6)}
 </style>
 </head>
 <body>
@@ -399,6 +405,11 @@ ${r.surpriseFactor ? `<div class="surprise"><div class="surp-l">⚡ Why This May
   <button class="act act-s" onclick="set({step:'input',result:null,portrait:null,photo:null,urls:['','','']})">Try Again</button>
 </div>
 <div class="copy-ok ${S.copied ? 'show' : ''}">✦ Copied to clipboard — ready to share!</div>
+<div class="renovation">
+  <div class="ren-eyebrow">✦ &nbsp; Your Revolutionary Soul, Today &nbsp; ✦</div>
+  <p class="ren-body"><strong>${r.figureName}'s</strong> fire didn't die in ${(r.figureYears||'').split('–')[1]||'the 18th century'}. The same restless conviction that drove figures like yours is exactly what America needs again right now — and it lives in you. <em>The Renovation</em> is where that conversation happens.</p>
+  <a class="ren-link" href="https://markdmills.substack.com/" target="_blank" rel="noopener">Read The Renovation →</a>
+</div>
 </div>`;
 
     const pi = document.getElementById('portImg');
